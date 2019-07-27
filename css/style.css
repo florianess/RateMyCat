@@ -1,0 +1,19 @@
+#main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#stars {
+    color: #ffd800;
+    cursor: pointer;
+    font-size: 3rem;
+    display: flex; 
+}
+img {
+    object-fit: cover;
+    object-position: center center;
+    height: 300px;
+    width: 300px
+
+}
