@@ -18,7 +18,6 @@ const photo = document.getElementById("photo");
 const frame = document.getElementById("frame");
 const next = document.getElementById("next")
 frame.onclick = newCat;
-photo.onmouseenter = zoomphoto
 newCat();
 
 function fillStars(val) {
