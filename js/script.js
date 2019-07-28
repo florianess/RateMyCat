@@ -1,13 +1,10 @@
+let API_URI = "https://www.jsonstore.io/5176ecaca7eb5c06027a54d0fcfb7ddd8f2a64a029db501862c2ab0c8e02ae02/data"
 let data = {}
-
-function createElements() {
-    data = JSON.parse(this.responseText);
-}
 
 let request = new XMLHttpRequest();
 
-request.onload = function() { data = JSON.parse(this.responseText);};
-request.open("get", "https://api.myjson.com/bins/raex9", true);
+request.onload = function() { data = JSON.parse(this.responseText).result; };
+request.open("GET", API_URI, true);
 request.send();
 
 let canGoNext = true;
@@ -21,6 +18,7 @@ const photo = document.getElementById("photo");
 const frame = document.getElementById("frame");
 const next = document.getElementById("next")
 frame.onclick = newCat;
+photo.onmouseenter = zoomphoto
 newCat();
 
 function fillStars(val) {
@@ -34,7 +32,7 @@ function fillStars(val) {
         }
     }
     next.style.visibility = 'visible';
-    frame.style.cursor = 'pointer';
+    frame.classList.add('pointer');
     note = parseInt(val);
     canGoNext = true;
 };
@@ -47,7 +45,7 @@ function newCat() {
         photo.src = photo.src = `cats/cat.${id}.jpg`;
         stars.innerHTML = emptyStars;
         next.style.visibility = 'hidden';
-        frame.style.cursor = 'default';
+        frame.classList.remove('pointer');;
         canGoNext = false;
     }
 };
@@ -62,9 +60,8 @@ function save() {
             data = {...data, [id]: { note: [note], mean: note }};
         }
         let xhr = new XMLHttpRequest();
-        xhr.open("PUT", 'https://api.myjson.com/bins/raex9', true);
+        xhr.open("POST", `https://www.jsonstore.io/5176ecaca7eb5c06027a54d0fcfb7ddd8f2a64a029db501862c2ab0c8e02ae02/data/${id}`, true);
         xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.send(JSON.stringify(data));  
-        console.log(data)
+        xhr.send(JSON.stringify(data[id]));
     }
 }

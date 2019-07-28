@@ -1,7 +1,13 @@
+body {
+    margin: 0
+}
+
 #main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100vh;
+    justify-content: space-around;
 }
 
 #stars {
@@ -10,11 +16,17 @@
     font-size: 3rem;
     display: flex; 
 }
-img {
-    object-fit: cover;
-    object-position: center center;
+
+#frame {
     height: 300px;
-    width: 300px;
+    width: 100vw;
+    text-align: center;
+}
+
+img {
+    height: auto;
+    max-height: 300px;
+    width: auto;
 }
 
 #next {
@@ -23,4 +35,15 @@ img {
     width: 300px;
     margin: 0;
     visibility: hidden;
+}
+
+#bottom {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+    font-size: 1.5rem;
+}
+
+.pointer {
+    cursor: pointer;
 }
