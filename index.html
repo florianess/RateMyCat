@@ -10,7 +10,10 @@
 <body>
     <div id="main">
         <h1>Rate My Cat</h1>
-        <img id="photo" src=""/>
+        <div id="frame">
+            <h2 id="next">Click to next cat</h2>
+            <img id="photo" src="" alt="cat"/>
+        </div>
         <div id="stars">
             <div id="0" onclick="fillStars(1);">☆</div>
             <div id="1" onclick="fillStars(2);">☆</div>
@@ -19,6 +22,7 @@
             <div id="4" onclick="fillStars(5);">☆</div>
         </div>
     </div>
+    <script type="application/json" src="data.json"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
