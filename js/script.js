@@ -7,7 +7,7 @@ function createElements() {
 let request = new XMLHttpRequest();
 
 request.onload = function() { data = JSON.parse(this.responseText);};
-request.open("get", "data.json", true);
+request.open("get", "https://api.myjson.com/bins/raex9", true);
 request.send();
 
 let canGoNext = true;
@@ -62,7 +62,7 @@ function save() {
             data = {...data, [id]: { note: [note], mean: note }};
         }
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", 'data.json', true);
+        xhr.open("PUT", 'https://api.myjson.com/bins/raex9', true);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(JSON.stringify(data));  
         console.log(data)
