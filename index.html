@@ -10,7 +10,7 @@
 <body>
     <div id="main">
         <h1>Rate My Cat</h1>
-        <div id="frame">
+        <div id="frame" onclick="newCat()">
             <h2 id="next">Click to next cat</h2>
             <img id="photo" src="" alt="cat"/>
         </div>
@@ -22,12 +22,12 @@
             <div id="4" onclick="fillStars(5);">☆</div>
         </div>
         <div id="bottom">
-            <div id="wrong" class="pointer">
+            <button id="wrong" class="pointer" onclick="ignoreCat()">
                 ❌
-            </div>
-            <div class="pointer">
+            </button>
+            <button class="pointer">
                 📷
-            </div>
+            </button>
         </div>
     </div>
     <script type="application/json" src="data.json"></script>

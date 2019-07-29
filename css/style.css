@@ -7,7 +7,7 @@ body {
     flex-direction: column;
     align-items: center;
     height: 100vh;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 #stars {
@@ -18,29 +18,27 @@ body {
 }
 
 #frame {
-    height: 300px;
+    max-height: 300px;
+    height: 40vh;
     width: 100vw;
     text-align: center;
 }
 
 img {
-    height: auto;
-    max-height: 300px;
-    width: auto;
+    max-height: 40vh;
 }
 
 #next {
     position: absolute;
-    height: 300px;
-    width: 300px;
-    margin: 0;
+    width: 100vw;
     visibility: hidden;
 }
 
 #bottom {
     display: flex;
-    justify-content: space-between;
-    width: 300px;
+    justify-content: space-around;
+    width: 100vw;
+    max-width: 300px;
     font-size: 1.5rem;
 }
 

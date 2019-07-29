@@ -1,13 +1,22 @@
-let API_URI = "https://www.jsonstore.io/5176ecaca7eb5c06027a54d0fcfb7ddd8f2a64a029db501862c2ab0c8e02ae02/data"
+const BASE_URI = "https://www.jsonstore.io/5176ecaca7eb5c06027a54d0fcfb7ddd8f2a64a029db501862c2ab0c8e02ae02/"
+const DATA_URI = BASE_URI + 'data'
+const IGNORE_URI = BASE_URI + 'ignore'
 let data = {}
-
+let ignore = []
 let request = new XMLHttpRequest();
 
 request.onload = function() { data = JSON.parse(this.responseText).result; };
-request.open("GET", API_URI, true);
+request.open("GET", DATA_URI, true);
 request.send();
 
+let ignoreRequest = new XMLHttpRequest();
+
+ignoreRequest.onload = function() { ignore = JSON.parse(this.responseText).result; };
+ignoreRequest.open("GET", IGNORE_URI, true);
+ignoreRequest.send();
+
 let canGoNext = true;
+let isIgnore = false;
 let note = 1;
 let id = 0;
 
@@ -16,9 +25,8 @@ const emptyStars = stars.innerHTML;
 
 const photo = document.getElementById("photo");
 const frame = document.getElementById("frame");
-const next = document.getElementById("next")
-frame.onclick = newCat;
-newCat();
+const next = document.getElementById("next");
+renderCat();
 
 function fillStars(val) {
     for (let i = 0; i < 5; i++) {
@@ -36,15 +44,21 @@ function fillStars(val) {
     canGoNext = true;
 };
 
+function renderCat() {
+    id = getRandom();
+    photo.src = photo.src = `cats/cat.${id}.jpg`;
+    stars.innerHTML = emptyStars;
+    next.style.visibility = 'hidden';
+    frame.classList.remove('pointer');
+}
+
 function newCat() {
-    if (canGoNext) {
-        console.log(id, ' NOTE: ', note);
-        save()
-        id = Math.round(Math.random()*4000);
-        photo.src = photo.src = `cats/cat.${id}.jpg`;
-        stars.innerHTML = emptyStars;
-        next.style.visibility = 'hidden';
-        frame.classList.remove('pointer');;
+    if (isIgnore) {
+        renderCat();
+        isIgnore = false;
+    } else if (canGoNext) {
+        save();
+        renderCat();
         canGoNext = false;
     }
 };
@@ -59,8 +73,28 @@ function save() {
             data = {...data, [id]: { note: [note], mean: note }};
         }
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", `https://www.jsonstore.io/5176ecaca7eb5c06027a54d0fcfb7ddd8f2a64a029db501862c2ab0c8e02ae02/data/${id}`, true);
+        xhr.open("POST", `${DATA_URI}/${id}`, true);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(JSON.stringify(data[id]));
     }
+}
+
+function getRandom() {
+    let isValid = false;
+    let newId;
+    do {
+        newId = Math.round(Math.random()*4000);
+        isValid = !ignore.includes(id.toString(10));
+    } while (!isValid);
+    return newId
+}
+
+function ignoreCat() {
+    ignore.push(id)
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", IGNORE_URI, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(ignore));
+    isIgnore = true;
+    newCat()
 }
