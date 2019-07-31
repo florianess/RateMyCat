@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TRAINING</title>
+    <script src="https://unpkg.com/ml5@0.3.1/dist/ml5.min.js"></script>
+</head>
+
+<body>
+    <img src="cats/cat.1.jpg" id="test" width="224px" height="224px">
+    <button onclick='train()'>TRAIN</button>
+    <script>
+        const featureExtractor = ml5.featureExtractor("MobileNet", modelLoaded);
+        const testImg = document.getElementById("test");
+
+        function loadJSON(path, success, error) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        if (success)
+                            success(JSON.parse(xhr.responseText));
+                    }
+                }
+            };
+            xhr.open("GET", path, true);
+            xhr.send();
+        }
+
+        function addImages(res) {
+            const keys = Object.keys(res);
+            keys.map((note) => {
+                return res[note].map((id) => {
+                    testImg.src = `cats/cat.${id}.jpg`;
+                    return classifier.addImage(testImg, note.toString(10))
+                })
+            });
+        }
+
+        function modelLoaded() {
+            console.log("Model Loaded!");
+        }
+
+        const classifier = featureExtractor.classification();
+        loadJSON('formatData.json', addImages)
+        // Retrain the network
+        function train() {
+            classifier.train(function (lossValue) {
+                console.log("Loss is", lossValue);
+            });
+        }
+
+    </script>
+</body>
+
+</html>
