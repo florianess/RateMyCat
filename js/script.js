@@ -24,7 +24,6 @@ const stars = document.getElementById("stars");
 const emptyStars = stars.innerHTML;
 
 const photo = document.getElementById("photo");
-const frame = document.getElementById("frame");
 const next = document.getElementById("next");
 renderCat();
 
@@ -39,7 +38,7 @@ function fillStars(val) {
         }
     }
     next.style.visibility = 'visible';
-    frame.classList.add('pointer');
+    photo.classList.add('pointer');
     note = parseInt(val);
     canGoNext = true;
 };
@@ -49,7 +48,7 @@ function renderCat() {
     photo.src = photo.src = `cats/cat.${id}.jpg`;
     stars.innerHTML = emptyStars;
     next.style.visibility = 'hidden';
-    frame.classList.remove('pointer');
+    photo.classList.remove('pointer');
 }
 
 function newCat() {
