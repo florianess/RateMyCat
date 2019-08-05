@@ -1,5 +1,18 @@
 body {
-    margin: 0
+    margin: 0;
+    background-color: #fcdaff;
+    font-family: 'Beth Ellen', cursive;
+}
+
+#oval {
+    width: 300px;
+    height: 40vh;
+    background: #E8BAD8;
+    border-radius: 10px;
+    position: absolute;
+    top: -20vh;
+    z-index: 1;
+    box-shadow: 0px 5px 10px 0px rgba(128, 128, 128, 0.5);
 }
 
 #main {
@@ -44,4 +57,17 @@ img {
 
 .pointer {
     cursor: pointer;
+}
+
+h1 {
+    z-index: 2;
+}
+
+.button {
+    height: 60px;
+    width: 60px;
+    background-color: #E8BAD8;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: 0px 5px 10px 0px rgba(128, 128, 128, 0.5);
 }

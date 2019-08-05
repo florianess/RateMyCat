@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Beth+Ellen&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <title>RateMyCat</title>
 </head>
 <body>
     <div id="main">
+        <div id="oval"></div>
         <h1>Rate My Cat</h1>
         <div id="frame" onclick="newCat()">
             <h2 id="next">Click to next cat</h2>
@@ -22,12 +24,12 @@
             <div id="4" onclick="fillStars(5);">☆</div>
         </div>
         <div id="bottom">
-            <button id="wrong" class="pointer" onclick="ignoreCat()">
+            <div class="button" id="wrong" class="pointer" onclick="ignoreCat()">
                 ❌
-            </button>
-            <button class="pointer">
+            </div>
+            <div class="button" class="pointer">
                 📷
-            </button>
+            </div>
         </div>
     </div>
     <script type="application/json" src="data.json"></script>
